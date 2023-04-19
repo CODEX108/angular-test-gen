@@ -85,6 +85,11 @@ function generateTest(filepath) {
       },
       ImportDeclaration(path) {
         if (path.node.type === "ImportDeclaration") {
+          const sourcePath = path.node.source.value;
+          if (path.isAbsolute(path.node.source.value)) {
+            const relativePath = path.relative(path.dirname(filepath), sourcePath);
+            path.node.source.value = `./${relativePath}`;
+          }
           if (path.node.specifiers.length === 1) {
             importList.push({
               import: path.node.specifiers[0].local.name,
@@ -149,7 +154,7 @@ function generateTest(filepath) {
 }
 
 function main() {
-  console.log(gradient("orange", "yellow", "red")("Angular Test Generator"));
+  console.log(gradient("orange", "yellow", "red")("Angular Tests Generator"));
   inquirer
     .prompt([
       {
