@@ -154,7 +154,7 @@ function generateTest(filepath) {
 }
 
 function main() {
-  console.log(gradient("orange", "yellow", "red")("Angular test Generator"));
+  console.log(gradient("orange", "blue", "red")("Angular test Generator"));
   inquirer
     .prompt([
       {
